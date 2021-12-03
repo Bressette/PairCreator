@@ -1,3 +1,43 @@
 .pair-header-text {
   text-align: center;
 }
+
+.input-row {
+  margin-top: 10px;
+}
+
+.group-card {
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.group-card-title {
+  padding: 10px;
+}
+
+.group-text {
+  padding: 5px;
+}
+
+.button-col {
+  display: flex;
+  justify-content: center;
+}
+
+.button-row {
+  margin-top: 40px;
+}
+
+.names-textarea {
+  width: 100%;
+  height: 100%
+}
+
+.group-size-row {
+  margin-top: 30px;
+}
+
+.previous-pairs-textarea {
+  width: 100%;
+  height: 100%;
+}

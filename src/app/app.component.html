@@ -1,9 +1,46 @@
 <h1 class="pair-header-text">Random Pair Creator</h1>
 
-<div>
-  <div class="card">
-    <div class="card-title">Group 1</div>
-    <div class="card-text">name 1 name 2 name 3 name 4</div>
+<div class="container">
+  <div class="row">
+    <div class="col-6" *ngFor="let i of groupSize; let j = index;">
+      <div class="card group-card">
+        <div class="card-header group-card-title">Group {{j}}</div>
+        <div class="card-text group-text">Johnathan Johnathan Johnathan Johnathan</div>
+      </div>
+    </div>
+  </div>
+  <form [formGroup]="formGroup">
+  <div class="row input-row">
+      <div class="col">
+        <span>Team member names</span><br>
+        <textarea class="names-textarea" formControlName="groupNames" type="text"></textarea>
+      </div>
+      <div class="col">
+        <span>Incompatible Names</span><br>
+        <textarea class="names-textarea" formControlName="incompatibleNames" type="text"></textarea>
+      </div>
+  </div>
+  </form>
+
+  <div class="row group-size-row">
+    <div class="col">
+      <span>Pair Size</span> <br>
+      <input formControlName="groupSize" type="number" value="4">
+    </div>
+    <div class="col previous-pairs-col">
+      <span>Previous Pairs</span> <br>
+      <textarea class="previous-pairs-textarea">Test,Test,Test,Test,Test</textarea>
+    </div>
+  </div>
+
+  <div class="row button-row">
+    <div class="col button-col">
+      <button type=button class="btn btn-primary">Generate Pairs</button>
+    </div>
+  </div>
+
+  <div class="row explain-row">
+    <h2>How to create random pairs</h2>
   </div>
 </div>
 
