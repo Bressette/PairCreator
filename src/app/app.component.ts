@@ -29,6 +29,9 @@ export class AppComponent {
     this.pairString = [];
     let names: string[];
     names = this.formGroup.get('groupNames')?.value.split(',').map((result: string) => result.trim());
+    if (this.formGroup.get('groupSize')?.value > names.length) {
+      return alert('The group size must be less than the number of names');
+    }
     while (names.length > 0) {
       for (let j = 0; j < this.formGroup.get('groupSize')?.value; j++) {
         if (this.pairs.length < j + 1) {
