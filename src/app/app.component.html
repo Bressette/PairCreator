@@ -24,12 +24,12 @@
 
   <div class="row group-size-row">
     <div class="col">
-      <span>Pair Size</span> <br>
+      <span>Number of Pairs</span> <br>
       <input formControlName="groupSize" type="number" value="2">
     </div>
     <div class="col previous-pairs-col">
       <span>Previous Pairs</span> <br>
-      <textarea class="previous-pairs-textarea">Test,Test,Test,Test,Test</textarea>
+      <textarea class="previous-pairs-textarea" formControlName="previousPairs"></textarea>
     </div>
   </div>
   </form>
@@ -38,10 +38,6 @@
     <div class="col button-col">
       <button type=button class="btn btn-primary" (click)="generatePairs()">Generate Pairs</button>
     </div>
-  </div>
-
-  <div class="row explain-row">
-    <h2>How to create random pairs</h2>
   </div>
 </div>
 
