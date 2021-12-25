@@ -128,31 +128,35 @@ export class AppComponent implements OnInit {
     if (this.formGroup.get('groupSize')?.value > names.length) {
       return alert('The group size must be less than the number of names');
     }
-    while (names.length > 0) {
-      for (let j = 0; j < this.formGroup.get('groupSize')?.value; j++) {
-        if (this.pairs.length < j + 1) {
-          this.pairs.push(new PairGroup());
-          const firstPairIndex = Math.floor(Math.random() * names.length);
-          this.pairs[j].names.push(names[firstPairIndex]);
-          names.splice(firstPairIndex, 1);
-          continue;
+    try {
+      while (names.length > 0) {
+        for (let j = 0; j < this.formGroup.get('groupSize')?.value && names.length > 0; j++) {
+          if (this.pairs.length < j + 1) {
+            this.pairs.push(new PairGroup());
+            const firstPairIndex = Math.floor(Math.random() * names.length);
+            this.pairs[j].names.push(names[firstPairIndex]);
+            names.splice(firstPairIndex, 1);
+            continue;
+          }
+          const currentIncompatibleNames: string[] = incompatibleNamesMap.get(this.pairs[j].names[0]);
+          let compatibleNames: string[];
+          if (!currentIncompatibleNames) {
+            compatibleNames = [...names];
+          } else {
+            compatibleNames = names.filter(s => !currentIncompatibleNames.includes(s));
+          }
+          const selectedIndex = Math.floor(Math.random() * compatibleNames.length);
+          if (!compatibleNames[selectedIndex]) {
+            this.pairString = [];
+            this.pairs = [];
+            this.generatePairs();
+          }
+          this.pairs[j].names.push(compatibleNames[selectedIndex]);
+          names.splice(names.indexOf(compatibleNames[selectedIndex]), 1);
         }
-        const currentIncompatibleNames: string[] = incompatibleNamesMap.get(this.pairs[j].names[0]);
-        let compatibleNames: string[];
-        if (!currentIncompatibleNames) {
-          compatibleNames = [...names];
-        } else {
-          compatibleNames = names.filter(s => !currentIncompatibleNames.includes(s));
-        }
-        const selectedIndex = Math.floor(Math.random() * compatibleNames.length);
-        if (!compatibleNames[selectedIndex]) {
-          this.pairString = [];
-          this.pairs = [];
-          this.generatePairs();
-        }
-        this.pairs[j].names.push(compatibleNames[selectedIndex]);
-        names.splice(names.indexOf(compatibleNames[selectedIndex]), 1);
       }
+    } catch (e) {
+      console.log(`Encountered exception: ${JSON.stringify(e)}`);
     }
 
     for (const pair of this.pairs) {
